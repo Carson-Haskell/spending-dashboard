@@ -1,6 +1,8 @@
-import Expenses from './components/Expenses';
+import React from 'react';
 
-function App() {
+import Expenses from './components/Expenses/Expenses';
+
+const App = () => {
   const expenseData = [
     {
       id: 'e1',
@@ -28,7 +30,13 @@ function App() {
     },
   ];
 
-  return <Expenses expenseData={expenseData} />;
-}
+  return (
+    <>
+      <h1 className="mainText">Expense Dashboard</h1>
+      <Expenses expenseData={expenseData} />
+      <h2 className="mainText">Thanks for using our product!</h2>
+    </>
+  );
+};
 
 export default App;
