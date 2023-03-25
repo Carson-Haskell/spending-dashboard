@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Expenses from './components/Expenses/Expenses';
+import NewExpense from './components/NewExpense/NewExpense';
 
 const App = () => {
+
   const expenseData = [
     {
       id: 'e1',
@@ -33,6 +35,7 @@ const App = () => {
   return (
     <>
       <h1 className="mainText">Expense Dashboard</h1>
+      <NewExpense />
       <Expenses expenseData={expenseData} />
       <h2 className="mainText">Thanks for using our product!</h2>
     </>
