@@ -4,10 +4,18 @@ import Card from '../UI/Card';
 
 import './NewExpense.css';
 
-const NewExpense = () => {
+const NewExpense = ({ onAddExpense }) => {
+  const handleSaveExpenseData = (enteredExpenseData) => {
+    const expenseData = {
+      ...enteredExpenseData,
+      id: crypto.randomUUID(),
+    };
+    onAddExpense(expenseData);
+  };
+
   return (
     <Card className="new-expense">
-      <ExpenseForm />
+      <ExpenseForm onSaveExpenseData={handleSaveExpenseData} />
     </Card>
   );
 };

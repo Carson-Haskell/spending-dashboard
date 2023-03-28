@@ -4,8 +4,7 @@ import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
 
 const App = () => {
-
-  const expenseData = [
+  const [expenses, setExpenses] = useState([
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -30,13 +29,17 @@ const App = () => {
       amount: 450.33,
       date: new Date(2021, 5, 12),
     },
-  ];
+  ]);
+
+  const handleAddExpense = (expense) => {
+    setExpenses([...expenses, expense]);
+  };
 
   return (
     <>
       <h1 className="mainText">Expense Dashboard</h1>
-      <NewExpense />
-      <Expenses expenseData={expenseData} />
+      <NewExpense onAddExpense={handleAddExpense} />
+      <Expenses expenseData={expenses} />
       <h2 className="mainText">Thanks for using our product!</h2>
     </>
   );
