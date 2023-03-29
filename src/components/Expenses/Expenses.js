@@ -7,18 +7,24 @@ import ExpenseFilter from './ExpenseFilter';
 import './Expenses.css';
 
 const Expenses = ({ expenseData }) => {
-  const [filteredYear, setFilteredYear] = useState('');
+  const [filteredYear, setFilteredYear] = useState('2022');
 
   return (
     <>
-      <Card>
-        <ExpenseFilter handleYearFilter={setFilteredYear} />
-      </Card>
       <Card className="expenses">
-        {expenseData.map((expense) => {
+        <ExpenseFilter
+          selected={filteredYear}
+          filterByYear={setFilteredYear}
+        />
+        {expenseData?.map((expense) => {
           const { id } = expense;
           return <ExpenseItem key={id} {...expense} />;
         })}
+        {expenseData.length < 1 && (
+          <p className="no-expenses">
+            No expenses: enter your first expense above!
+          </p>
+        )}
       </Card>
     </>
   );
