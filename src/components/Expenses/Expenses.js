@@ -7,16 +7,27 @@ import ExpenseFilter from './ExpenseFilter';
 import './Expenses.css';
 
 const Expenses = ({ expenseData }) => {
-  const [filteredYear, setFilteredYear] = useState('2022');
+  const [filteredYear, setFilteredYear] = useState('all');
+
+  const handleFilterChange = (selectedYear) => {
+    setFilteredYear(selectedYear);
+    expenseData.filter((expense) => expense.date === filteredYear);
+  };
+
+  const filteredExpenses = expenseData.filter((expense) => {
+    if (filteredYear === 'all') return expense;
+
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
 
   return (
     <>
       <Card className="expenses">
         <ExpenseFilter
           selected={filteredYear}
-          filterByYear={setFilteredYear}
+          filterByYear={handleFilterChange}
         />
-        {expenseData?.map((expense) => {
+        {filteredExpenses?.map((expense) => {
           const { id } = expense;
           return <ExpenseItem key={id} {...expense} />;
         })}
