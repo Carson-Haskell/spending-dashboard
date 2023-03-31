@@ -5,7 +5,7 @@ import Card from '../UI/Card';
 import './NewExpense.css';
 
 const NewExpense = ({ addExpense }) => {
-  const [showExpenseForm, setShowExpenseForm] = useState(false);
+  const [isEditingForm, setIsEditingForm] = useState(false);
 
   const saveExpenseData = (enteredExpenseData) => {
     const expenseData = {
@@ -15,16 +15,19 @@ const NewExpense = ({ addExpense }) => {
     addExpense(expenseData);
   };
 
-  const handleClick = () => {
-    setShowExpenseForm(!showExpenseForm);
+  const handleFormEditing = () => {
+    setIsEditingForm(!isEditingForm);
   };
 
   return (
     <Card className="new-expense">
-      {!showExpenseForm ? (
-        <button onClick={handleClick}>Add New Expense</button>
+      {!isEditingForm ? (
+        <button onClick={handleFormEditing}>Add New Expense</button>
       ) : (
-        <ExpenseForm saveExpenseData={saveExpenseData} closeForm={handleClick}/>
+        <ExpenseForm
+          saveExpenseData={saveExpenseData}
+          handleFormEditing={handleFormEditing}
+        />
       )}
     </Card>
   );
